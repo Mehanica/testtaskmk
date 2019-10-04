@@ -1,0 +1,77 @@
+// colors
+$color-main-background: rgb(255, 255, 255);
+$color-secondary-background: #f1f1f1;
+$color-grey-lighter-background: #f9f9f9;
+$color-black: #000000;
+$color-black-opacity60: rgba(0, 0, 0, 0.6);
+$color-black-opacity30: rgba(0, 0, 0, 0.3);
+$color-grey-medium: #7c7c7c;
+$color-grey: #c7c7c7;
+$color-grey-medium-light: #e7e7e7;
+$color-grey-smoky: #e5e5e5;
+$color-grey-lighter: #ececec;
+$color-main-text: #000000;
+$color-invert-text: #ffffff;
+$color-secondary-text: rgb(68, 68, 68);
+$color-main-text-opacity: rgba(255, 255, 255, 0.3);
+$color-grey-light: #d3d2d2;
+$color-green: rgb(98, 209, 186);
+// $color-green-opacity: rgba(98, 209, 186, 0.3);
+$color-green-background-dark: #56c3b2;
+$color-green-background-dark-copy: rgb(70, 193, 174);
+$color-green-dark-copy-opacity: rgba(70, 193, 174, 0.3);
+$color-green-background-light:#63d1bb;
+$color-green-backgrount-leght-copy: #59d5bc;
+$color-map-backgrond-color: #f4efe2;
+
+
+//fonts
+$font-size-extra-super-large: 53px;
+$font-size-extra-large: 43px;
+$font-size-lagger: 30px;
+$font-size-biggest: 27px;
+$font-size-bigger: 25px;
+$font-size-large: 20px;
+$font-size-big: 19px;
+$font-size-medium: 18px;
+$font-size-main: 17px;
+$font-size-small: 15px;
+$font-size-smaller: 14px;
+$font-size-smallest: 13px;
+
+
+//width
+$width-tablet: 768px;
+$width-desktop: 1150px;
+$width-only-mobile: 767px;
+
+//retina
+$retina-dpi: 144dpi;
+$retina-dppx: 1.5dppx;
+
+// mixins
+@mixin visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0, 0, 0, 0);
+  overflow: hidden;
+}
+
+@mixin centering {
+  margin: 0 auto;
+  width: 260px;
+
+  @media (min-width: $width-tablet) {
+    width: 668px;
+  }
+
+  @media (min-width: $width-desktop) {
+    width: 1050px;
+  }
+}
