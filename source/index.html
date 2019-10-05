@@ -6,7 +6,7 @@
     </script>
     <script src="js/picturefill.min.js" async></script>
     <meta charset="utf-8">
-    <title>Мишка</title>
+    <title>Регистрация</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <!-- <link rel="preload" href="fonts/opensans.woff2" as="font" crossorigin="anonymous">
     <link rel="preload" href="fonts/opensansbold.woff2" as="font" crossorigin="anonymous"> -->
@@ -37,6 +37,48 @@
     <script src="../node_modules/pixel-glass/script.js"></script>
   </head>
   <body>
+    <main class="main">
+      <h1 class="main__title">Регистрация</h1>
 
+      <a class="main__button  button" href="#">Регистрация</a>
+    </main>
+    <section class="pop-up">
+      <h2 class="pop-up__title">Регистрация</h1>
+
+      <form class="pop-up__form" action="https://echo.htmlacademy.ru">
+        <div class="pop-up__form-login  field-login">
+          <label class="field-login__label" for="mail">E-mail</label>
+          <input class="field-login__input" type="email" name="email" id="mail" required="">
+
+          <label class="field-login__label" for="name">Никнейм</label>
+          <input class="field-login__input" type="text" name="name" id="name" required="">
+
+          <label class="field-login__label" for="password-field">Пароль</label>
+          <input class="field-login__input" type="password" name="password" id="password-field" required="">
+
+          <ul class="field-login__rule-list">Пароль должен содержать:
+            <li class="field-login__rule-message">от 6 до 32 символов</li>
+            <li class="field-login__rule-message">цифру</li>
+            <li class="field-login__rule-message">заглавную и строчную буквы</li>
+          </ul>
+
+          <span class="field-login__error-message  field-login__error-message--nickname-active">Пароль не должен совпадать с Никнеймом</span>
+
+          <label class="field-login__label" for="password-duplicate-field">Пароль ещё раз</label>
+          <input class="field-login__input" type="password" name="password-duplicate" id="password-duplicate-field" required="">
+
+          <span class="field-login__error-message  field-login__error-message--mismatch-active">Введённые пароли не совпадают</span>
+        </div>
+
+        <p class="pop-up__form-checkbox">
+          <label class="checkbox  pop-up__field-checkbox">
+            <input class="checkbox__input" type="checkbox" name="user-agreement">
+            <span class="checkbox__caption">Я принимаю условия<a href="#">Пользовательского соглашения</a></span>
+          </label>
+        </p>
+
+        <button class="pop-up__button  button" type="submit">Зарегистрироваться</button>
+      </form>
+    </section>
   </body>
 </html>
