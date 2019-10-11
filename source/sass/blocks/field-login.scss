@@ -1,0 +1,92 @@
+.field-login {
+  display: flex;
+  flex-direction: column;
+}
+
+.field-login__label {
+  margin-top: 29px;
+  margin-bottom: 11px;
+  font-size: $font-size-main;
+  line-height: 16px / $font-size-main;
+  font-weight: bold;
+  letter-spacing: 0;
+  color: $color-secondary-text;
+
+  &--duplicate-password {
+    margin-top: 10px;
+    letter-spacing: -0.3px;
+  }
+}
+
+.field-login__input--error {
+  border-color: $color-error;
+
+  &:focus {
+    border-color: $color-error;
+  }
+}
+
+.field-login__rule-list {
+  position: relative;
+  margin-top: 6px;
+  font-size: $font-size-small;
+  line-height: 14px / $font-size-small;
+  font-weight: bold;
+  letter-spacing: -0.2px;
+  color: $color-default;
+}
+
+.field-login__rule-message {
+  margin-top: 6px;
+  margin-left: 19px;
+  list-style: none;
+  font-weight: normal;
+  letter-spacing: 0.2px;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0px;
+    width: 14px;
+    height: 14px;
+    border: 1px solid $color-default;
+    border-radius: 50%;
+  }
+
+  &--ok {
+    color: $color-right;
+
+    &::before {
+      border-color: $color-right;
+      background-image: url("../../img/green.svg");
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+  }
+
+  &--error {
+    color: $color-error;
+
+    &::before {
+      border-color: $color-error;
+      background-image: url("../../img/red-cross.svg");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 90%;
+    }
+  }
+}
+
+.field-login__error-message {
+  display: none;
+  margin-top: 6px;
+  font-size: $font-size-small;
+  line-height: 14px / $font-size-small;
+  font-weight: normal;
+  color: $color-error;
+  letter-spacing: 0.2px;
+}
+
+.field-login__error-message--active {
+  display: inline-block;
+}

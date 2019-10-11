@@ -1,0 +1,15 @@
+.main {
+  position: relative;
+  max-width: 1920px;
+  min-height: 100vh;
+}
+
+.main__title {
+  @include visually-hidden;
+}
+
+.main__button {
+  position: absolute;
+  top: 50%;
+  left: calc(50% - 85px);
+}

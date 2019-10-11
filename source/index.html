@@ -11,74 +11,69 @@
     <!-- <link rel="preload" href="fonts/opensans.woff2" as="font" crossorigin="anonymous">
     <link rel="preload" href="fonts/opensansbold.woff2" as="font" crossorigin="anonymous"> -->
     <link rel="stylesheet" href="css/style.min.css">
-    <style>
-      HTML {
-        background-repeat: no-repeat;
-        background-position:  50% 0;
-        /* Mobile layout by default */
-        background-image: url( "img/320.png" ); /* тут должна быть фотка картинки подложки */
-      }
-      /* Tablet */
-      @media ( min-width: 760px ) {
-        HTML {
-          /* Tablet layout */
-          background-image: url( "img/760.png" ); /* тут должна быть фотка картинки подложки */
-        }
-      }
-      /* Desktop */
-      @media ( min-width: 960px ) {
-        HTML {
-          /* Desktop layout */
-          background-image: url( "img/960.png" ); /* тут должна быть фотка картинки подложки */
-        }
-      }
-    </style>
-    <link href="../node_modules/pixel-glass/styles.css" rel="stylesheet">
-    <script src="../node_modules/pixel-glass/script.js"></script>
   </head>
   <body>
+    <div style="display: none">
+      <include src="build/img/sprite.svg"></include>
+    </div>
+
     <main class="main">
       <h1 class="main__title">Регистрация</h1>
 
       <a class="main__button  button" href="#">Регистрация</a>
     </main>
     <section class="pop-up">
-      <h2 class="pop-up__title">Регистрация</h1>
+      <h2 class="pop-up__title">Регистрация</h2>
 
-      <form class="pop-up__form" action="https://echo.htmlacademy.ru">
+      <form class="pop-up__form" action="https://echo.htmlacademy.ru" autocomplete="off">
         <div class="pop-up__form-login  field-login">
           <label class="field-login__label" for="mail">E-mail</label>
-          <input class="field-login__input" type="email" name="email" id="mail" required="">
+          <input class="field-login__input" type="email" name="email" id="mail" required>
+          <!-- <span class="field-login__error-message">Это поле необходимо заполнить.</span> -->
+          <span class="field-login__error-message  field-login__error-message--mail-wrong">Пожалуйста, введите действительный адрес электронной почты. Например, johndoe@domain.com</span>
 
           <label class="field-login__label" for="name">Никнейм</label>
-          <input class="field-login__input" type="text" name="name" id="name" required="">
+          <input class="field-login__input" type="text" name="name" id="name" required>
+          <span class="field-login__error-message  field-login__error-message--name-wrong">Никнейм может содержать от 3 до 40 символов. Латинские буквы и цифры, символы "_" и ";".Никнейм может начинаться только с буквы.</span>
 
           <label class="field-login__label" for="password-field">Пароль</label>
-          <input class="field-login__input" type="password" name="password" id="password-field" required="">
+          <input class="field-login__input" type="password" name="password" id="password-field" minlength="6" maxlength="32" required>
 
           <ul class="field-login__rule-list">Пароль должен содержать:
-            <li class="field-login__rule-message">от 6 до 32 символов</li>
-            <li class="field-login__rule-message">цифру</li>
-            <li class="field-login__rule-message">заглавную и строчную буквы</li>
+            <li class="field-login__rule-message  field-login__rule-message--limit">от 6 до 32 символов</li>
+            <li class="field-login__rule-message  field-login__rule-message--number">цифру</li>
+            <li class="field-login__rule-message  field-login__rule-message--letter">заглавную и строчную буквы</li>
           </ul>
 
-          <span class="field-login__error-message  field-login__error-message--nickname-active">Пароль не должен совпадать с Никнеймом</span>
+          <span class="field-login__error-message  field-login__error-message--nicknamematch">Пароль не должен совпадать с Никнеймом</span>
+          <span class="field-login__error-message  field-login__error-message--emailmatch">Пароль не должен совпадать с почтовым адресом</span>
 
-          <label class="field-login__label" for="password-duplicate-field">Пароль ещё раз</label>
-          <input class="field-login__input" type="password" name="password-duplicate" id="password-duplicate-field" required="">
+          <label class="field-login__label field-login__label--duplicate-password" for="password-duplicate-field">Пароль ещё раз</label>
+          <input class="field-login__input" type="password" name="password-duplicate" id="password-duplicate-field" minlength="6" maxlength="32" required>
 
-          <span class="field-login__error-message  field-login__error-message--mismatch-active">Введённые пароли не совпадают</span>
+          <span class="field-login__error-message  field-login__error-message--password">Введённые пароли не совпадают</span>
         </div>
 
         <p class="pop-up__form-checkbox">
-          <label class="checkbox  pop-up__field-checkbox">
-            <input class="checkbox__input" type="checkbox" name="user-agreement">
-            <span class="checkbox__caption">Я принимаю условия<a href="#">Пользовательского соглашения</a></span>
+          <label class="checkbox  pop-up__field-checkbox" tabindex="0">
+            <input class="checkbox__input" type="checkbox" name="user-agreement" required>
+            <span class="checkbox__caption">Я принимаю условия</span>
           </label>
+          <a href="#">Пользовательского соглашения</a>
         </p>
 
-        <button class="pop-up__button  button" type="submit">Зарегистрироваться</button>
+        <button class="pop-up__button  button" type="submit" disabled>Зарегистрироваться</button>
       </form>
+
+      <button class="pop-up__close" type="button">Закрыть
+        <svg width="19" height="19">
+          <use xlink:href="#icon-cross"></use>
+        </svg>
+      </button>
     </section>
+
+    <script src="js/form.js"></script>
+    <script src="js/button.js"></script>
+
   </body>
 </html>

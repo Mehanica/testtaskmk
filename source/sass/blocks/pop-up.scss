@@ -1,0 +1,83 @@
+.pop-up {
+  display: none;
+  position: absolute;
+  left: calc(50% - 480px / 2);
+  top: calc(50% - 700px / 2);
+  width: 480px;
+  min-height: 700px;
+  padding-left: 39px;
+  padding-right: 41px;
+  padding-top: 39px;
+  background-color: $color-modal-background;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+}
+
+.pop-up--active {
+  display: block;
+}
+
+.pop-up__title {
+  font-size: $font-size-big;
+  line-height: 28px / $font-size-big;
+  font-weight: normal;
+  letter-spacing: 0.5px;
+}
+
+.pop-up__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.pop-up__form-checkbox {
+  position: relative;
+  margin-top: 16px;
+}
+
+.pop-up__form-checkbox a {
+  margin-left: 6px;
+  font-size: $font-size-small;
+  line-height: 14px / $font-size-small;
+  font-weight: normal;
+  text-decoration: none;
+  letter-spacing: 0.2px;
+  color: $color-button-secondary-background;
+
+  &:hover,
+  &:focus {
+    text-decoration: underline;
+    outline: none;
+  }
+}
+
+.pop-up__button {
+  position: relative;
+  left: calc(50% - 100px);
+  margin-top: 42px;
+  width: 200px;
+  padding-left: 0;
+  padding-right: 0;
+  font-weight: bold;
+}
+
+.pop-up__close {
+  position: absolute;
+  top: 38px;
+  right: 47px;
+  font-size: 0;
+  border: none;
+  background: none;
+  fill: #C4C4C4;
+  cursor: pointer;
+  outline: none;
+
+  &:hover,
+  &:focus,
+  &:active {
+    fill: $color-button-background;
+  }
+}
+
+.pop-up__field-checkbox {
+  outline: none;
+}
