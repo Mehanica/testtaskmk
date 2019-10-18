@@ -41,16 +41,3 @@ $retina-dppx: 1.5dppx;
   clip: rect(0, 0, 0, 0);
   overflow: hidden;
 }
-
-@mixin centering {
-  margin: 0 auto;
-  width: 260px;
-
-  @media (min-width: $width-tablet) {
-    width: 668px;
-  }
-
-  @media (min-width: $width-desktop) {
-    width: 1050px;
-  }
-}

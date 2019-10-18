@@ -2,7 +2,6 @@
 
 (function () {
 
-  var link = document.querySelector(".main__button");
   var close = window.form.popup.querySelector(".pop-up__close");
 
   var linkClickHandler = function (evt) {
@@ -11,7 +10,7 @@
     window.form.popup.classList.add("pop-up--active");
   };
 
-  link.addEventListener('click', linkClickHandler);
+  window.form.link.addEventListener('click', linkClickHandler);
 
   var closeClickHandler = function () {
     window.form.resetForm();
@@ -33,5 +32,4 @@
 
   window.addEventListener("keydown", escKeydownHandler);
   close.addEventListener('click', closeClickHandler);
-
 })();

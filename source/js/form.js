@@ -10,9 +10,10 @@
     'checkbox': false
   };
 
-  var popup = document.querySelector(".pop-up");
-  var popupForm = popup.querySelector(".pop-up__form");
-  var fieldInputs = popupForm.querySelectorAll(".field-login__input");
+  var link = document.querySelector('.main__button');
+  var popup = document.querySelector('.pop-up');
+  var popupForm = popup.querySelector('.pop-up__form');
+  var fieldInputs = popupForm.querySelectorAll('.field-login__input');
   var mailInput = popupForm.querySelector('#mail');
   var nicknameInput = popupForm.querySelector('#name');
   var passwordInput = popupForm.querySelector('#password-field');
@@ -31,6 +32,9 @@
   var typingTimer;
   var formTypingTimer;
   var doneTypingInterval = 1000;
+  var regNumb = /.*\d.*/;
+  var regLetterLowerUpperCase = /(?=.*[A-Z])(?=.*[a-z]).*/;
+  var regLimit = /^.{6,32}$/;
 
   var showErrorMessage = function (element) {
     if(!activeErrorMessageClass) {
@@ -65,39 +69,43 @@
     })
   };
 
-  var checkPasswordAndEmailMismatch = function () {
-    if (passwordInput.value === mailInput.value && (passwordInput.value || mailInput.value)) {
+  var checkPasswordAndMailAndNicknameMismatch = function () {
+    if (passwordInput.value === mailInput.value && mailInput.value) {
       showErrorMessage(mailMatchErrorMessage);
       passwordInput.classList.add('field-login__input--error');
       InputFieldsState.password = false;
-    } else {
-      removeErrorMessage(mailMatchErrorMessage);
-      passwordInput.classList.remove('field-login__input--error');
-    }
-  };
-
-  var checkNicknameAndPasswordMismatch = function () {
-    if (passwordInput.value === nicknameInput.value && (passwordInput.value || nicknameInput.value)) {
+    } else if (passwordInput.value === nicknameInput.value && nicknameInput.value) {
       showErrorMessage(nicknameMatckErrorMessage);
       passwordInput.classList.add('field-login__input--error');
       InputFieldsState.password = false;
-    } else {
+    } else if ((regNumb.test(passwordInput.value) && regLetterLowerUpperCase.test(passwordInput.value) && regLimit.test(passwordInput.value)) && (mailInput.value || nicknameInput.value)) {
+      removeErrorMessage(mailMatchErrorMessage);
       removeErrorMessage(nicknameMatckErrorMessage);
       passwordInput.classList.remove('field-login__input--error');
-    };
+      InputFieldsState.password = true;
+    }
   };
 
   var checkPasswordMatch = function () {
-    if (passwordInput.value !== passwordDuplicateInput.value) {
+    if (passwordInput.value !== passwordDuplicateInput.value && passwordDuplicateInput.value) {
       showErrorMessage(passwordDuplicateErrorMessage);
       passwordDuplicateInput.classList.add('field-login__input--error');
+      InputFieldsState.passwordDuplicate = false;
+    } else if (passwordInput.value !== passwordDuplicateInput.value && !passwordDuplicateInput.value) {
+      removeErrorMessage(passwordDuplicateErrorMessage);
+      passwordDuplicateInput.classList.remove('field-login__input--error');
+      InputFieldsState.passwordDuplicate = false;
+    } else if (passwordInput.value === passwordDuplicateInput.value && !passwordDuplicateInput.value) {
+      removeErrorMessage(passwordDuplicateErrorMessage);
+      passwordDuplicateInput.classList.remove('field-login__input--error');
       InputFieldsState.passwordDuplicate = false;
     } else {
       removeErrorMessage(passwordDuplicateErrorMessage);
       passwordDuplicateInput.classList.remove('field-login__input--error');
       InputFieldsState.passwordDuplicate = true;
-    }
+    };
   };
+
 
   mailInput.addEventListener('input', function () {
     clearTimeout(typingTimer);
@@ -105,20 +113,22 @@
   });
 
   var validateEmailInput = function () {
-    var reg = /^\w{1,}@\w{1,}\.\w{1,}$/;
+    var reg = /.+@.+\..+/i;
 
     if (reg.test(mailInput.value) && mailInput.value) {
+      removeErrorMessage(mailWrongErrorMessage);
+      mailInput.classList.remove('field-login__input--error');
       InputFieldsState.email = true;
-    }
-
-    if (!reg.test(mailInput.value) && mailInput.value) {
+    } else if (!reg.test(mailInput.value) && mailInput.value){
       showErrorMessage(mailWrongErrorMessage);
       mailInput.classList.add('field-login__input--error');
       InputFieldsState.email = false;
     } else {
       removeErrorMessage(mailWrongErrorMessage);
       mailInput.classList.remove('field-login__input--error');
+      InputFieldsState.email = false;
     };
+    checkPasswordAndMailAndNicknameMismatch();
   };
 
   nicknameInput.addEventListener('input', function () {
@@ -129,15 +139,20 @@
   var validateNicknameInput = function () {
     var reg = /^[a-zA-Z][a-zA-Z0-9-_;]{2,40}$/;
 
-    if (!reg.test(nicknameInput.value) && nicknameInput.value) {
+    if (reg.test(nicknameInput.value) && nicknameInput.value) {
+      removeErrorMessage(nameWrongErrorMessage);
+      nicknameInput.classList.remove('field-login__input--error');
+      InputFieldsState.nickname = true;
+    } else if (!reg.test(nicknameInput.value) && nicknameInput.value){
       showErrorMessage(nameWrongErrorMessage);
       nicknameInput.classList.add('field-login__input--error');
       InputFieldsState.nickname = false;
     } else {
       removeErrorMessage(nameWrongErrorMessage);
       nicknameInput.classList.remove('field-login__input--error');
-      InputFieldsState.nickname = true;
+      InputFieldsState.nickname = false;
     };
+    checkPasswordAndMailAndNicknameMismatch();
   };
 
   passwordInput.addEventListener('input', function () {
@@ -146,16 +161,13 @@
   });
 
   var validatePasswordInput = function () {
-    var regNumb = /.*\d.*/;
-    var regLetterLowerUpperCase = /(?=.*[A-Z])(?=.*[a-z]).*/;
-    var regLimit = /^.{6,32}$/;
-
     if (regNumb.test(passwordInput.value)) {
       ruleMessageNumber.classList.add('field-login__rule-message--ok');
       ruleMessageNumber.classList.remove('field-login__rule-message--error');
-    } else if(ruleMessageNumber.classList.contains('field-login__rule-message--ok') && !regNumb.test(passwordInput.value)) {
+    } else if (ruleMessageNumber.classList.contains('field-login__rule-message--ok') && !regNumb.test(passwordInput.value)) {
       ruleMessageNumber.classList.remove('field-login__rule-message--ok');
       ruleMessageNumber.classList.add('field-login__rule-message--error');
+      passwordInput.classList.add('field-login__input--error');
       InputFieldsState.password = false;
     };
 
@@ -165,6 +177,7 @@
     } else if (ruleMessageLowerUpperCase.classList.contains('field-login__rule-message--ok') && !regLetterLowerUpperCase.test(passwordInput.value)) {
       ruleMessageLowerUpperCase.classList.remove('field-login__rule-message--ok');
       ruleMessageLowerUpperCase.classList.add('field-login__rule-message--error');
+      passwordInput.classList.add('field-login__input--error');
       InputFieldsState.password = false;
     };
 
@@ -174,17 +187,27 @@
     } else if (ruleMessageLimit.classList.contains('field-login__rule-message--ok') && !regLimit.test(passwordInput.value)) {
       ruleMessageLimit.classList.remove('field-login__rule-message--ok');
       ruleMessageLimit.classList.add('field-login__rule-message--error');
+      passwordInput.classList.add('field-login__input--error');
       InputFieldsState.password = false;
     };
 
     if (regNumb.test(passwordInput.value) && regLetterLowerUpperCase.test(passwordInput.value) && regLimit.test(passwordInput.value)) {
-      if (passwordInput.value !== mailInput.value && passwordInput.value !== nicknameInput.value && mailInput.value && nicknameInput.value) {
-        InputFieldsState.password = true;
-      }
-    };
-
-    checkPasswordAndEmailMismatch();
-    checkNicknameAndPasswordMismatch();
+      passwordInput.classList.remove('field-login__input--error');
+      InputFieldsState.password = true;
+    } else if (!passwordInput.value) {
+      passwordInput.classList.remove('field-login__input--error');
+      ruleMessageLimit.classList.remove('field-login__rule-message--error');
+      ruleMessageLowerUpperCase.classList.remove('field-login__rule-message--error');
+      ruleMessageNumber.classList.remove('field-login__rule-message--error');
+      removeErrorMessage(mailMatchErrorMessage);
+      removeErrorMessage(nicknameMatckErrorMessage);
+      removeErrorMessage(passwordDuplicateErrorMessage);
+    } else {
+      passwordInput.classList.add('field-login__input--error');
+      InputFieldsState.password = false;
+    }
+    checkPasswordAndMailAndNicknameMismatch();
+    checkPasswordMatch();
   };
 
   passwordDuplicateInput.addEventListener('input', function () {
@@ -223,8 +246,33 @@
     buttonForm.disabled = validateForm();
   };
 
+  var toJSONString = function (form) {
+    var obj = {};
+    var elements = form.querySelectorAll('input, select, textarea');
+
+    for (var i = 0; i < elements.length; ++i) {
+      var element = elements[i];
+      var name = element.name;
+      var value = element.value;
+
+      if(name) {
+        obj[name] = value;
+      }
+    }
+    return JSON.stringify(obj);
+  };
+
+  popupForm.addEventListener('submit', function (evt) {
+    evt.preventDefault();
+
+    console.log(toJSONString(popupForm));
+    popup.classList.remove('pop-up--active');
+    link.classList.add('button--disabled-green');
+  });
+
   window.form = {
+    link: link,
     popup: popup,
-    resetForm: resetForm,
+    resetForm: resetForm
   }
 })();

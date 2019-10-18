@@ -1,6 +1,9 @@
 .main {
   position: relative;
-  max-width: 1920px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   min-height: 100vh;
 }
 

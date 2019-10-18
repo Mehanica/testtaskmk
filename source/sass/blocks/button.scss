@@ -20,8 +20,14 @@
     outline: none;
   }
 
-  &:disabled,
-  &:active {
+  &:disabled {
     background-color: $color-button-secondary-background;
+    box-shadow: none;
+    cursor: auto;
+  }
+
+  &--disabled-green {
+    background-color: $color-right;
+    pointer-events: none;
   }
 }

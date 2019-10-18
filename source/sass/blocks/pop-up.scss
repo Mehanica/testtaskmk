@@ -4,7 +4,6 @@
   left: calc(50% - 480px / 2);
   top: calc(50% - 700px / 2);
   width: 480px;
-  min-height: 700px;
   padding-left: 39px;
   padding-right: 41px;
   padding-top: 39px;
@@ -54,10 +53,13 @@
   position: relative;
   left: calc(50% - 100px);
   margin-top: 42px;
+  margin-bottom: 40px;
   width: 200px;
   padding-left: 0;
   padding-right: 0;
   font-weight: bold;
+
+
 }
 
 .pop-up__close {
